@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Feira Barata</string>
+    <string name="search_hint">Procure por um produto&#8230;</string>
 </resources>
