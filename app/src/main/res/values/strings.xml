@@ -4,4 +4,6 @@
     <string name="e_mail">E-mail&#8230;</string>
     <string name="password">Senha&#8230;</string>
     <string name="btn_login">Login</string>
+    <string name="menu_login">Fazer login</string>
+    <string name="menu_cadastro">Fazer cadastro</string>
 </resources>
