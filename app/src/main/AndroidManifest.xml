@@ -18,5 +18,8 @@
         <activity
             android:name=".LoginActivity" >
         </activity>
+        <activity
+            android:name=".CadastroActivity">
+        </activity>
     </application>
 </manifest>

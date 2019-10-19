@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.hardware.camera2.CameraDevice;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(startLoginActivity);
                 return true;
             case R.id.menu_cadastro:
+                Intent startCadastroActivity = new Intent(MainActivity.this, CadastroActivity.class);
+                MainActivity.this.startActivity(startCadastroActivity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

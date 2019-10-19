@@ -6,4 +6,10 @@
     <string name="btn_login">Login</string>
     <string name="menu_login">Fazer login</string>
     <string name="menu_cadastro">Fazer cadastro</string>
+    <string name="nome_cadastro">Nome&#8230;</string>
+    <string name="conf_senha_cadastro">Confirmar senha&#8230;</string>
+    <string name="cpf_cadastro">CPF&#8230;</string>
+    <string name="telefone_cadastro">Telefone&#8230;</string>
+    <string name="nascimento_cadastro">Data de nascimento&#8230;</string>
+    <string name="btn_cadastro">Cadastrar</string>
 </resources>
