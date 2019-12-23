@@ -12,4 +12,8 @@
     <string name="telefone_cadastro">Telefone&#8230;</string>
     <string name="nascimento_cadastro">Data de nascimento&#8230;</string>
     <string name="btn_cadastro">Cadastrar</string>
+    <string name="product_name_hint">Nome do produto&#8230;</string>
+    <string name="product_price_hint">Preço do produto&#8230;</string>
+    <string name="product_brand_hint">Marca do produto&#8230;</string>
+    <string name="product_quantity_hint">Peso ou volume&#8230;</string>
 </resources>
