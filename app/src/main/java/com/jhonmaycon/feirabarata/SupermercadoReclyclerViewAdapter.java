@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,9 +42,9 @@ public class SupermercadoReclyclerViewAdapter extends RecyclerView.Adapter<Super
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        Glide.with(context).asBitmap().load(supermercadosImagesList.get(position)).into(holder.supermercadoImage);
+        //Glide.with(context).asBitmap().load(supermercadosImagesList.get(position)).into(holder.supermercadoImage);
         holder.supermercadoName.setText(supermercadosNamesList.get(position));
-        holder.supermercaItemConstraintLayout.setOnClickListener(new View.OnClickListener() {
+        holder.supermercadoItemCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "OnClick: clicked on: "+ supermercadosNamesList.get(position));
@@ -61,14 +62,14 @@ public class SupermercadoReclyclerViewAdapter extends RecyclerView.Adapter<Super
 
         ImageView supermercadoImage;
         TextView supermercadoName;
-        ConstraintLayout supermercaItemConstraintLayout;
+        CardView supermercadoItemCardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             supermercadoImage = itemView.findViewById(R.id.supermercado_image);
             supermercadoName = itemView.findViewById(R.id.supermercado_name);
-            supermercaItemConstraintLayout = itemView.findViewById(R.id.supermercado_item_layout);
+            supermercadoItemCardView = itemView.findViewById(R.id.cardview_supermercado_item);
         }
     }
 }

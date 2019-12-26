@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.hardware.camera2.CameraDevice;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -45,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar appToolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(appToolbar);
         loadRecyclerViewData();
+
     }
 
     @Override
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initReclyclerView(){
-        Log.d(TAG, "initReclyclerView: called");
+        Log.d(TAG, "initRecyclerView: called");
 
         RecyclerView recyclerView = findViewById(R.id.reclycler_vew_mercardos);
         SupermercadoReclyclerViewAdapter adapter = new SupermercadoReclyclerViewAdapter(supermercadoImageUrl, supermercadoName, this);
