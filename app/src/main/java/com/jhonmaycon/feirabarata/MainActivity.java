@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> supermercadoImageUrl = new ArrayList<>();
     private  ArrayList<String> supermercadoName = new ArrayList<>();
-    private String url_data = "http://feirabarata.jhonmaycon.com/api/supermercados/read.php";
+    private String URL_DATA = "http://feirabarata.jhonmaycon.com/api/supermercados/read.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +71,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadRecyclerViewData(){
 
+        Log.d(TAG, "loadRecyclerViewData: called");
+
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Carregando dados...");
         progressDialog.show();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url_data, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         supermercadoName.add(supermercado.getString("nome"));
                     }
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.d(TAG, e.getMessage());
                 }
             }
         }, new Response.ErrorListener() {
