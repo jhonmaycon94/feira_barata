@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.hardware.camera2.CameraDevice;
 import android.os.Bundle;
@@ -13,6 +14,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -22,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<String> supermercadoImageUrl = new ArrayList<>();
     private  ArrayList<String> supermercadoName = new ArrayList<>();
+    private String url_data = "http://feirabarata.jhonmaycon.com/api/supermercados/read.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar appToolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(appToolbar);
-        loadImagesBitmaps();
+        loadRecyclerViewData();
     }
 
     @Override
@@ -57,10 +69,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void loadImagesBitmaps(){
+    private void loadRecyclerViewData(){
 
-        supermercadoImageUrl.add("https://www.ocaminho.net.br/fl/normal/47-5c49e5f44a221_bombom.jpg?node_id=47");
-        supermercadoName.add("Bombom");
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Carregando dados...");
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url_data, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                try {
+                    JSONObject supermercadosListJson = new JSONObject(response);
+                    JSONArray records = supermercadosListJson.getJSONArray("records");
+
+                    for (int i = 0; i < records.length(); i++){
+                        JSONObject supermercado = records.getJSONObject(i);
+                        supermercadoImageUrl.add(supermercado.getString("foto"));
+                        supermercadoName.add(supermercado.getString("nome"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Log.d(TAG, error.toString());
+            }
+        });
+
+
 
         initReclyclerView();
     }
