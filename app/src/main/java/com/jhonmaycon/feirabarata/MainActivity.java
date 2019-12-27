@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SupermercadoReclyclerViewAdapter.OnSupermercadoCardViewListener {
 
     private static final String TAG = "MainActivity";
 
@@ -115,8 +115,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "initRecyclerView: called");
 
         RecyclerView recyclerView = findViewById(R.id.reclycler_vew_mercardos);
-        SupermercadoReclyclerViewAdapter adapter = new SupermercadoReclyclerViewAdapter(supermercadoImageUrl, supermercadoName, this);
+        SupermercadoReclyclerViewAdapter adapter = new SupermercadoReclyclerViewAdapter(supermercadoImageUrl, supermercadoName, this, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onSupermercadoCardViewClick(int position) {
+        supermercadoName.get(position);
+        Intent intent = new Intent(this, ProdutosActivity.class);
+        startActivity(intent);
     }
 }
