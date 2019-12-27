@@ -20,9 +20,9 @@ import java.util.ArrayList;
 public class SupermercadoReclyclerViewAdapter extends RecyclerView.Adapter<SupermercadoReclyclerViewAdapter.ViewHolder>{
     private static final String TAG = "SupermercadoReclyclerVi";
 
-    private ArrayList<String> supermercadosImagesList = new ArrayList<>();
-    private ArrayList<String> supermercadosNamesList = new ArrayList<>();
-    private Context context;
+    ArrayList<String> supermercadosImagesList;
+    ArrayList<String> supermercadosNamesList;
+    Context context;
 
     public SupermercadoReclyclerViewAdapter(ArrayList<String> supermercadosImagesList, ArrayList<String> supermercadosNamesList, Context context) {
         this.supermercadosImagesList = supermercadosImagesList;
@@ -55,8 +55,9 @@ public class SupermercadoReclyclerViewAdapter extends RecyclerView.Adapter<Super
 
     @Override
     public int getItemCount() {
-        return supermercadosImagesList.size();
+        return supermercadosNamesList.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -67,9 +68,9 @@ public class SupermercadoReclyclerViewAdapter extends RecyclerView.Adapter<Super
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            supermercadoItemCardView = itemView.findViewById(R.id.cardview_supermercado_item);
             supermercadoImage = itemView.findViewById(R.id.supermercado_image);
             supermercadoName = itemView.findViewById(R.id.supermercado_name);
-            supermercadoItemCardView = itemView.findViewById(R.id.cardview_supermercado_item);
         }
     }
 }

@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject supermercado = records.getJSONObject(i);
                         supermercadoImageUrl.add(supermercado.getString("foto"));
                         supermercadoName.add(supermercado.getString("nome"));
+                        Log.d(TAG, supermercadoName.get(i));
                     }
                 } catch (JSONException e) {
                     Log.d(TAG, e.getMessage());
@@ -107,18 +108,15 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
 
-        initReclyclerView();
+        initRecyclerView();
     }
 
-    private void initReclyclerView(){
+    private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: called");
 
         RecyclerView recyclerView = findViewById(R.id.reclycler_vew_mercardos);
         SupermercadoReclyclerViewAdapter adapter = new SupermercadoReclyclerViewAdapter(supermercadoImageUrl, supermercadoName, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        DividerItemDecoration mDividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(),
-                recyclerView.getLayoutManager().getLayoutDirection());
-        recyclerView.addItemDecoration(mDividerItemDecoration);
     }
 }
