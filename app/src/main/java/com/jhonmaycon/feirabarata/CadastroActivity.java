@@ -1,6 +1,7 @@
 package com.jhonmaycon.feirabarata;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,11 +32,13 @@ public class CadastroActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private static String REGISTER_URL = "http://feirabarata.jhonmaycon.com/api/users/register.php";
 
+    private static final String TAG = "CadastroActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-
         name = findViewById(R.id.edt_nome_cadastro);
         password = findViewById(R.id.edt_senha_cadastro);
         confirmPassword = findViewById(R.id.edt_conf_senha_cadastro);
@@ -48,17 +51,19 @@ public class CadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(password.getText().equals(confirmPassword.getText())) {
+                Log.d(TAG, "onClick: called");
+                if(password.getText().toString().equals(confirmPassword.getText().toString())) {
                     register();
                 }
                 else {
-                    Toast.makeText(CadastroActivity.this, "Senhas não conferem", Toast.LENGTH_SHORT);
+                    Toast.makeText(CadastroActivity.this, "Senhas não conferem", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     public void register(){
+        Log.d(TAG, "register: called");
         progressBar.setVisibility(View.VISIBLE);
         btnCadastrar.setVisibility(View.GONE);
 
