@@ -42,7 +42,7 @@ public class SupermercadoReclyclerViewAdapter extends RecyclerView.Adapter<Super
     public void onBindViewHolder (@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        //Glide.with(context).asBitmap().load(supermercadosImagesList.get(position)).into(holder.supermercadoImage);
+        Glide.with(context).load(supermercadosImagesList.get(position)).into(holder.supermercadoImage);
         holder.supermercadoName.setText(supermercadosNamesList.get(position));
     }
 

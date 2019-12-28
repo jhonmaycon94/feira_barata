@@ -69,7 +69,6 @@ public class CadastroActivity extends AppCompatActivity {
 
         final String name = this.name.getText().toString().trim();
         final String password = this.password.getText().toString().trim();
-        final String confPassword = this.confirmPassword.getText().toString().trim();
         final String email = this.email.getText().toString().trim();
         final String telefone = this.telefone.getText().toString().trim();
         final String dataNascimento = this.dataNascimento.getText().toString().trim();

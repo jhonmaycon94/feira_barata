@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
                         JSONObject supermercado = records.getJSONObject(i);
                         supermercadoImageUrl.add(supermercado.getString("foto"));
                         supermercadoName.add(supermercado.getString("nome"));
-                        Log.d(TAG, supermercadoName.get(i));
                     }
                 } catch (JSONException e) {
                     Log.d(TAG, e.getMessage());
