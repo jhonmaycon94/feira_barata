@@ -1,5 +1,6 @@
 package com.jhonmaycon.feirabarata;
 
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -76,25 +77,33 @@ public class CadastroActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, REGISTER_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String success = jsonObject.getString("success");
+                Log.d(TAG, "onResponse: " + response);
+                if (response.contains("success")) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        Log.d(TAG, jsonObject.toString());
+                        String success = jsonObject.getString("success");
 
-                    if(success.equals(1)){
-                        Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
+                        if (success.equals('1')) {
+                            Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(CadastroActivity.this, "Erro ao cadastrar! " + e.toString(), Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        btnCadastrar.setVisibility(View.VISIBLE);
                     }
                 }
-                catch (JSONException e){
-                    e.printStackTrace();
-                    Toast.makeText(CadastroActivity.this, "Erro ao cadastrat! " + e.toString(), Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                    btnCadastrar.setVisibility(View.VISIBLE);
+                else{
+                    Toast.makeText(CadastroActivity.this, "Erro ao cadastrar!", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onResponse: " + response);
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(CadastroActivity.this, "Erro ao cadastrat! " + error.toString(), Toast.LENGTH_SHORT).show();
+                error.printStackTrace();
+                Toast.makeText(CadastroActivity.this, "Erro ao cadastrar! " + error.toString(), Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 btnCadastrar.setVisibility(View.VISIBLE);
             }
@@ -108,7 +117,7 @@ public class CadastroActivity extends AppCompatActivity {
                 params.put("password", password);
                 params.put("telefone", telefone);
                 params.put("dataNascimento", dataNascimento);
-                return super.getParams();
+                return params;
             }
         };
 
