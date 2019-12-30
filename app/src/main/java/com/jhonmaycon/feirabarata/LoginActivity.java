@@ -1,5 +1,6 @@
 package com.jhonmaycon.feirabarata;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -82,6 +83,11 @@ public void login(final String email,final String senha){
 
                             loading.setVisibility(View.GONE);
                             Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!!", Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("nome", nome);
+                            intent.putExtra("email", email);
+                            startActivity(intent);
                         }
                     }
                     else{

@@ -6,16 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/tv_username_session"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#C62828"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_toolbar" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/searchView"
+        app:layout_constraintBottom_toTopOf="@+id/tv_username_session"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:title="@string/app_name" />
 
     <SearchView
@@ -23,13 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="6dp"
-        android:layout_marginTop="30dp"
         android:iconifiedByDefault="false"
         android:queryHint="@string/search_hint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_username_session" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reclycler_vew_mercardos"
@@ -41,12 +49,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
-    <TextView
-        android:id="@+id/tx_username_session"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="TextView"
-        app:layout_constraintTop_toBottomOf="@+id/app_toolbar"
-        tools:layout_editor_absoluteX="164dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,6 @@ package com.jhonmaycon.feirabarata;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,16 +34,24 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
     private ArrayList<String> supermercadoImageUrl = new ArrayList<>();
     private  ArrayList<String> supermercadoName = new ArrayList<>();
     private String URL_DATA = "http://feirabarata.jhonmaycon.com/api/supermercados/read.php";
+    private TextView username;
+    private String emailsession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: started");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_logged_in);
         Toolbar appToolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(appToolbar);
         loadRecyclerViewData();
+        username = findViewById(R.id.tv_username_session);
+        Intent intent = getIntent();
+        String extraNome = intent.getStringExtra("nome");
+        String extraEmail = intent.getStringExtra("email");
 
+        username.setText("Bem-vindo(a) " + extraNome);
+        emailsession = extraEmail;
     }
 
     @Override

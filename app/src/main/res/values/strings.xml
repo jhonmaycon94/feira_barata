@@ -16,4 +16,5 @@
     <string name="product_price_hint">Preço do produto&#8230;</string>
     <string name="product_brand_hint">Marca do produto&#8230;</string>
     <string name="product_quantity_hint">Peso ou volume&#8230;</string>
+    <string name="user_welcome_message">Bem-vindo(a), </string>
 </resources>
