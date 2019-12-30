@@ -9,4 +9,9 @@
         android:id="@+id/menu_cadastro"
         android:title="@string/menu_cadastro"
         app:showAsAction="collapseActionView"/>
+    <item
+        android:id="@+id/menu_logout"
+        android:title="Logout"
+        app:showAsAction="collapseActionView"/>
+
 </menu>

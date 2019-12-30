@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -26,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements SupermercadoReclyclerViewAdapter.OnSupermercadoCardViewListener {
 
@@ -36,22 +38,28 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
     private String URL_DATA = "http://feirabarata.jhonmaycon.com/api/supermercados/read.php";
     private TextView username;
     private String emailsession;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: started");
-        setContentView(R.layout.activity_main_logged_in);
+        setContentView(R.layout.activity_main);
         Toolbar appToolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(appToolbar);
-        loadRecyclerViewData();
         username = findViewById(R.id.tv_username_session);
-        Intent intent = getIntent();
-        String extraNome = intent.getStringExtra("nome");
-        String extraEmail = intent.getStringExtra("email");
 
-        username.setText("Bem-vindo(a) " + extraNome);
-        emailsession = extraEmail;
+        sessionManager = new SessionManager(this);
+        if(sessionManager.isLoged()) {
+            HashMap<String, String> user = sessionManager.getUserDetail();
+            String userName = user.get(sessionManager.NAME);
+            emailsession = user.get(sessionManager.EMAIL);
+            username.setVisibility(View.VISIBLE);
+            username.setText("Bem-vindo(a) " + userName);
+        }
+        loadRecyclerViewData();
+
+
     }
 
     @Override
@@ -73,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
                 Intent startCadastroActivity = new Intent(MainActivity.this, CadastroActivity.class);
                 MainActivity.this.startActivity(startCadastroActivity);
                 return true;
+            case R.id.menu_logout:
+                sessionManager.logout();
             default:
                 return super.onOptionsItemSelected(item);
         }

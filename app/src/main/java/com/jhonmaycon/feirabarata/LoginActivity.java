@@ -33,11 +33,14 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar loading;
     private static String URL_LOGIN = "http://feirabarata.jhonmaycon.com/api/users/login.php";
     private static final String TAG = "LoginActivity";
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sessionManager = new SessionManager(this);
 
         loading = findViewById(R.id.loading);
         btnLogin = findViewById(R.id.btn_login);
@@ -83,6 +86,8 @@ public void login(final String email,final String senha){
 
                             loading.setVisibility(View.GONE);
                             Toast.makeText(LoginActivity.this, "Login efetuado com sucesso!!", Toast.LENGTH_SHORT).show();
+
+                            sessionManager.createSession(nome, email);
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("nome", nome);
