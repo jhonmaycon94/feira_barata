@@ -82,10 +82,12 @@ public class CadastroActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         Log.d(TAG, jsonObject.toString());
-                        String success = jsonObject.getString("success");
+                        Character success = jsonObject.getString("success").charAt(0);
 
-                        if (success.equals('1')) {
+                        if (success == '1') {
                             Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            btnCadastrar.setVisibility(View.VISIBLE);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
