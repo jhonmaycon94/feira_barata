@@ -1,7 +1,10 @@
 package com.jhonmaycon.feirabarata;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,23 +31,26 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NovoProduto extends AppCompatActivity {
+public class NovoProduto extends AppCompatActivity implements View.OnClickListener {
 
     private EditText nomeProduto, marcaProduto, quantidadeProduto, precoProduto;
     private ImageView imagemproduto;
     private Spinner supermercadoSpinner;
-    private Button btn_cadastrar;
+    private Button btn_cadastrar, btn_upload;
     private String userEmail;
     private List<String> supermercados = new ArrayList<>();
     private List<String> supermercadosIds = new ArrayList<>();
     private String selectedSupermercadoId;
     private ProgressBar progressBar;
     private static String CADASTROPRODUTO_URL = "http://feirabarata.jhonmaycon.com/api/products/register.php";
+    private static final int IMAGE_REQUEST = 2206;
+    private Bitmap bitmap;
 
     private static final String TAG = "NovoProduto";
 
@@ -63,15 +69,11 @@ public class NovoProduto extends AppCompatActivity {
         imagemproduto = findViewById(R.id.product_image);
         supermercadoSpinner = findViewById(R.id.supermercado_spinner);
         btn_cadastrar = findViewById(R.id.bt_cadastrar_produto);
+        btn_upload = findViewById(R.id.btn_upload_product_img);
         progressBar = findViewById(R.id.upload_product);
 
-        btn_cadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick called");
-                cadastrarProduto();
-            }
-        });
+        btn_cadastrar.setOnClickListener(this);
+        btn_upload.setOnClickListener(this);
 
         supermercadoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -153,5 +155,43 @@ public class NovoProduto extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt_cadastrar_produto:
+                Log.d(TAG, "onClick btn_cadastrar called");
+                cadastrarProduto();
+                break;
+            case R.id.btn_upload_product_img:
+                Log.d(TAG, "onClick: btn_upload called");
+                selectImage();
+                break;
+        }
+    }
+
+    public void selectImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null){
+            Uri path = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), path);
+                imagemproduto.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Log.d(TAG, "onActivityResult: erro");
+        }
     }
 }
