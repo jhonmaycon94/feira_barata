@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Toolbar appToolbar = findViewById(R.id.app_toolbar);
+        setSupportActionBar(appToolbar);
 
         sessionManager = new SessionManager(this);
 

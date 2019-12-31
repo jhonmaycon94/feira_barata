@@ -1,5 +1,6 @@
 package com.jhonmaycon.feirabarata;
 
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -40,6 +42,9 @@ public class CadastroActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+        Toolbar appToolbar = findViewById(R.id.app_toolbar);
+        setSupportActionBar(appToolbar);
+
         name = findViewById(R.id.edt_nome_cadastro);
         password = findViewById(R.id.edt_senha_cadastro);
         confirmPassword = findViewById(R.id.edt_conf_senha_cadastro);
@@ -85,9 +90,10 @@ public class CadastroActivity extends AppCompatActivity {
                         Character success = jsonObject.getString("success").charAt(0);
 
                         if (success == '1') {
-                            Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.GONE);
-                            btnCadastrar.setVisibility(View.VISIBLE);
+                            Toast.makeText(CadastroActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
+                            startActivity(intent);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

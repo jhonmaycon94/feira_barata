@@ -63,6 +63,21 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem logOut = menu.findItem(R.id.menu_logout);
+        MenuItem logIn = menu.findItem(R.id.menu_login);
+        MenuItem cadastro = menu.findItem(R.id.menu_cadastro);
+        MenuItem produto = menu.findItem(R.id.menu_produto);
+
+        logOut.setVisible(sessionManager.isLoged());
+        produto.setVisible(sessionManager.isLoged());
+        logIn.setVisible(!(sessionManager.isLoged()));
+        cadastro.setVisible(!(sessionManager.isLoged()));
+
+        return true;
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.options_menu, menu);
@@ -83,6 +98,10 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
                 return true;
             case R.id.menu_logout:
                 sessionManager.logout();
+            case R.id.menu_produto:
+                Intent startNovoProdutoActivity = new Intent(MainActivity.this, NovoProduto.class);
+                startNovoProdutoActivity.putExtra("user_email", emailsession);
+                MainActivity.this.startActivity(startNovoProdutoActivity);
             default:
                 return super.onOptionsItemSelected(item);
         }

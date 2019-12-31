@@ -9,10 +9,8 @@
         android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_marginBottom="20dp"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/edt_nome_cadastro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,40 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/nome_cadastro"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_toolbar" />
-
-    <EditText
-        android:id="@+id/edt_email_cadastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="66dp"
-        android:ems="10"
-        android:hint="@string/e_mail"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_nome_cadastro" />
-
-    <EditText
-        android:id="@+id/edt_senha_cadastro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginStart="20dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_email_cadastro" />
+        app:layout_constraintBottom_toTopOf="@+id/edt_email_cadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/edt_conf_senha_cadastro"
@@ -66,11 +38,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="@string/conf_senha_cadastro"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_senha_cadastro" />
 
@@ -80,11 +54,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/nascimento_cadastro"
         android:importantForAutofill="no"
         android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_conf_senha_cadastro" />
 
@@ -100,6 +76,8 @@
         android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/btn_cadastro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_nascimento_cadastro" />
 
@@ -107,23 +85,58 @@
         android:id="@+id/loading"
         android:layout_width="22dp"
         android:layout_height="16dp"
+        android:layout_marginTop="28dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_telefone_cadastro"/>
+        app:layout_constraintTop_toBottomOf="@+id/edt_telefone_cadastro" />
 
     <Button
         android:id="@+id/btn_cadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="162dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="144dp"
+        android:layout_marginBottom="200dp"
         android:text="@string/btn_cadastro"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_telefone_cadastro" />
+
+    <EditText
+        android:id="@+id/edt_email_cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/e_mail"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_nome_cadastro" />
+
+    <EditText
+        android:id="@+id/edt_senha_cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_email_cadastro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

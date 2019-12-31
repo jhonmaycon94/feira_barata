@@ -28,5 +28,8 @@
         <activity
             android:name=".ProdutosActivity">
         </activity>
+        <activity
+            android:name=".NovoProduto">
+        </activity>
     </application>
 </manifest>
