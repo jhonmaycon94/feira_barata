@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
 
     private ArrayList<String> supermercadoImageUrl = new ArrayList<>();
     private  ArrayList<String> supermercadoName = new ArrayList<>();
+    private ArrayList<String> supermercadoId = new ArrayList<>();
     private String URL_DATA = "http://feirabarata.jhonmaycon.com/api/supermercados/read.php";
     private TextView username;
     private String emailsession;
@@ -101,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
             case R.id.menu_produto:
                 Intent startNovoProdutoActivity = new Intent(MainActivity.this, NovoProduto.class);
                 startNovoProdutoActivity.putExtra("user_email", emailsession);
+                startNovoProdutoActivity.putExtra("supermercadosNames", supermercadoName);
+                startNovoProdutoActivity.putExtra("supermercadosId", supermercadoId);
                 MainActivity.this.startActivity(startNovoProdutoActivity);
             default:
                 return super.onOptionsItemSelected(item);
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
                         JSONObject supermercado = records.getJSONObject(i);
                         supermercadoImageUrl.add(supermercado.getString("foto"));
                         supermercadoName.add(supermercado.getString("nome"));
+                        supermercadoId.add(supermercado.getString("id"));
                     }
                 } catch (JSONException e) {
                     Log.d(TAG, e.getMessage());
@@ -159,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
     public void onSupermercadoCardViewClick(int position) {
         supermercadoName.get(position);
         Intent intent = new Intent(this, ProdutosActivity.class);
+        intent.putExtra("supermercadoId", supermercadoId.get(position));
         startActivity(intent);
     }
 }
