@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +32,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -150,6 +152,9 @@ public class NovoProduto extends AppCompatActivity implements View.OnClickListen
                 params.put("quantidade", pQuantidade);
                 params.put("userEmail", userEmail);
                 params.put("supermercadoId", selectedSupermercadoId);
+                if (bitmap != null) {
+                    params.put("image", imageToString(bitmap));
+                }
                 return params;
             }
         };
@@ -193,5 +198,12 @@ public class NovoProduto extends AppCompatActivity implements View.OnClickListen
         else {
             Log.d(TAG, "onActivityResult: erro");
         }
+    }
+
+    public String imageToString(Bitmap bitmap){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imgBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imgBytes, Base64.DEFAULT);
     }
 }

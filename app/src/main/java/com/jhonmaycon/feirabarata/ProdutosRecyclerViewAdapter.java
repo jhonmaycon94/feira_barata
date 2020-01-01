@@ -46,7 +46,7 @@ public class ProdutosRecyclerViewAdapter extends RecyclerView.Adapter<ProdutosRe
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
-        //Glide.with(context).asBitmap().load(productsImagesList.get(position)).into(holder.productImage);
+        Glide.with(context).load(productsImagesList.get(position)).into(holder.productImage);
         holder.productSupermercado.setText(productsSupermercado);
         holder.prdocutDescription.setText(productsDescriptionList.get(position));
         holder.prdocutPrice.setText(productsPriceList.get(position));
