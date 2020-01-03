@@ -44,6 +44,7 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
         Toolbar appToolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(appToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         name = findViewById(R.id.edt_nome_cadastro);
         password = findViewById(R.id.edt_senha_cadastro);

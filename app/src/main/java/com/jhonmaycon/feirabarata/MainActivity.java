@@ -43,14 +43,16 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        long initialTime = System.nanoTime();
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: started");
         setContentView(R.layout.activity_main);
         Toolbar appToolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(appToolbar);
+        loadRecyclerViewData();
         username = findViewById(R.id.tv_username_session);
 
-        sessionManager = new SessionManager(this);
+        sessionManager = new SessionManager(MainActivity.this);
         if(sessionManager.isLoged()) {
             HashMap<String, String> user = sessionManager.getUserDetail();
             String userName = user.get(sessionManager.NAME);
@@ -58,9 +60,10 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
             username.setVisibility(View.VISIBLE);
             username.setText("Bem-vindo(a) " + userName);
         }
-        loadRecyclerViewData();
 
-
+        long finalTime = System.nanoTime();
+        long duratiion = (finalTime - initialTime)/1000000;
+        Log.d(TAG, "onCreate: "+duratiion);
     }
 
     @Override
@@ -111,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
     }
 
     private void loadRecyclerViewData(){
-
+        long initialTime = System.nanoTime();
         Log.d(TAG, "loadRecyclerViewData: called");
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -121,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressDialog.dismiss();
                 try {
                     JSONObject supermercadosListJson = new JSONObject(response);
                     JSONArray records = supermercadosListJson.getJSONArray("records");
@@ -135,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
                 } catch (JSONException e) {
                     Log.d(TAG, e.getMessage());
                 }
+                initRecyclerView();
+                progressDialog.dismiss();
             }
         }, new Response.ErrorListener() {
             @Override
@@ -147,16 +151,22 @@ public class MainActivity extends AppCompatActivity implements SupermercadoRecly
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
 
-        initRecyclerView();
+        long finalTime = System.nanoTime();
+        long duratiion = (finalTime - initialTime)/1000000;
+        Log.d(TAG, "loadRecyclerViewData: " +duratiion);
     }
 
     private void initRecyclerView(){
         Log.d(TAG, "initRecyclerView: called");
+        long initialTime = System.nanoTime();
 
-        RecyclerView recyclerView = findViewById(R.id.reclycler_vew_mercardos);
         SupermercadoReclyclerViewAdapter adapter = new SupermercadoReclyclerViewAdapter(supermercadoImageUrl, supermercadoName, this, this);
+        RecyclerView recyclerView = findViewById(R.id.reclycler_vew_mercardos);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        long finalTime = System.nanoTime();
+        long duratiion = (finalTime - initialTime)/1000000;
+        Log.d(TAG, "initRecyclerView: " +duratiion);
     }
 
     @Override

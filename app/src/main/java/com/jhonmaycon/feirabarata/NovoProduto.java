@@ -63,6 +63,7 @@ public class NovoProduto extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_novo_produto);
         Toolbar toolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nomeProduto = findViewById(R.id.edt_nome_produto);
         marcaProduto = findViewById(R.id.edt_marca_produto);

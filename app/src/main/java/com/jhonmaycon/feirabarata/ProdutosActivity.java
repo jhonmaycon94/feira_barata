@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +38,7 @@ public class ProdutosActivity extends AppCompatActivity implements ProdutosRecyc
     private ArrayList<String> productsDescription = new ArrayList<>();
     private ArrayList<String> productsPrice = new ArrayList<>();
     private String productsSupermercado;
+    private ImageButton btnDeleteProduct;
     private String supermercadoId;
     private String URL_DATA;
     SessionManager sessionManager;
@@ -46,6 +50,14 @@ public class ProdutosActivity extends AppCompatActivity implements ProdutosRecyc
         setContentView(R.layout.activity_produtos);
         Toolbar appToolbar = findViewById(R.id.app_toolbar);
         setSupportActionBar(appToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        btnDeleteProduct = findViewById(R.id.btn_delete_product);
+        btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         Intent intent = getIntent();
         supermercadoId = intent.getStringExtra("supermercadoId");
@@ -130,6 +142,7 @@ public class ProdutosActivity extends AppCompatActivity implements ProdutosRecyc
                 catch (JSONException e){
                     Log.d(TAG, "onResponse: "+e.getMessage());
                 }
+                initRecyclerView();
 
             }
         }, new Response.ErrorListener() {
@@ -143,7 +156,7 @@ public class ProdutosActivity extends AppCompatActivity implements ProdutosRecyc
         RequestQueue queue = Volley.newRequestQueue(this);
         queue.add(stringRequest);
 
-        initRecyclerView();
+
     }
 
     public void initRecyclerView(){

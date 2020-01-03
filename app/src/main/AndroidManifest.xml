@@ -13,23 +13,28 @@
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity" >
+            android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity
-            android:name=".CadastroActivity">
+            android:name=".CadastroActivity"
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity
-            android:name=".ProdutosActivity">
+            android:name=".ProdutosActivity"
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity
-            android:name=".NovoProduto">
+            android:name=".NovoProduto"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 </manifest>
